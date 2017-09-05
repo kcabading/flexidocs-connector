@@ -1,0 +1,46 @@
+<div class="row-fluid" style="margin-bottom: 10px;">
+	<div class="alert alert-info alert-block" style="margin-bottom: 0; padding: 10px;">
+	  <strong>Flexidocs</strong> mass record document generation allows you to merge multiple records into<br/>
+	  either a single document, or multiple documents, depending on your preference. The resulting document<br/>
+	  can then be emailed or downloaded.
+	</div>
+</div>
+{{#if bLoaded}}
+    <div class="row-fluid tcenter">
+	    <div class="span4 offset4 tcenter">
+	    	Select your Document
+	    </div>
+    </div>
+    <div class="row-fluid tcenter">
+	    <div class="span4 offset4">
+	    	<select id="select_document" name="select_document" class="select2 inherit-width">
+	    		<option value=""></option>
+	    		{{#each arDocuments}}
+					{{#eq this.file_type 'docx'}}
+						{{#unless this.is_interactive}}
+							<option value="{{id}}">{{file_name}}</option>
+						{{/unless}}
+					{{/eq}}
+	    		{{/each}}
+	    	</select>
+	    </div>
+    </div>   
+    <div class="row-fluid tcenter">
+	    <div class="span4 offset4" style="margin-top: 10px; margin-bottom: 100px;">
+			<button id='cancel-merge' class='btn btn-default' style='margin-top: 10px;'><i class="icon-minus-sign fa fa-minus"></i> Cancel</button>
+			<button id='generate-doc' data-action='download' class='btn btn-primary' style='margin-top: 10px;'><i class="icon-ok-circle fa fa-download"></i> Download Document</button>
+			<button id='generate-doc' data-action='email' class='btn btn-primary' style='margin-top: 10px;'><i class="icon-ok-circle fa fa-envelope-o"></i> Email Document</button>
+	    </div>
+    </div>    
+{{else}}
+	<div class="row-fluid tcenter"> 
+	  <div class="title-section row-fluid record-panel-content tcenter"><h1> Loading Documents List...</h1></div>      
+	  <div class="row-fluid panel_body">
+	    <div class="span12">
+	      <div class="span4 offset4 tcenter record-cell">
+	        <i class="fa fa-spinner fa-5x fa-spin icon-spinner icon-5x icon-spin "></i>
+	      </div>  
+	    </div>
+	  </div>
+	</div>
+{{/if}}

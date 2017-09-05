@@ -1,0 +1,47 @@
+<div class="row-fluid" id="content" style="overflow-y: auto; overflow-x: hidden; background: #fff; height: 60%;">  
+  <form class="form-horizontal" style="width: 500px; margin: 0 auto; margin-top: 25px;">
+    <legend>IntelliDocs License Management</legend>
+    <div class="control-group">
+      <label class="control-label" for="intellidocs_license_key">Flexidocs License Key</label>
+      <div class="controls">
+        <input type="text" id="intellidocs_license_key" placeholder="Flexidocs License Key" value="{{objSetting.license_key}}">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="expiry_date">License Expiry Date</label>
+      <div class="controls">        
+        <label class="control-label">{{objSetting.expiry_date}}</label>
+      </div>
+    </div>    
+    <!--<div class="control-group">
+      <label class="control-label" for="sugar_client_id">Client ID</label>
+      <div class="controls">
+        <input type="text" id="sugar_client_id" placeholder="Client ID" value="{{objSetting.sugar_client_id}}">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="sugar_client_secret">Client Secret</label>
+      <div class="controls">
+        <input type="text" id="sugar_client_secret" placeholder="Client Secret" value="{{objSetting.sugar_client_secret}}">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="sugar_username">Admin Username</label>
+      <div class="controls">
+        <input type="text" id="sugar_username" placeholder="Admin Username" value="{{objSetting.sugar_username}}">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="sugar_password">Admin Password</label>
+      <div class="controls">
+        <input type="password" id="sugar_password" placeholder="Admin Password">
+      </div>
+    </div> -->
+    <div class="control-group tcenter">
+      <div class="controls" style="margin: 0px;">        
+        <button class="btn btn-default" id="cancel" type="button" style="margin: 0px;"><i class="icon-minus-sign fa fa-minus"></i> Close</button>                  
+        <button class="btn btn-primary" id="saveIntelliDocsSettings" type="button" style="margin: 0px;"><i class="icon-ok-circle fa fa-check"></i> Save and Validate License</button>
+      </div>
+    </div>
+  </form>
+</div>

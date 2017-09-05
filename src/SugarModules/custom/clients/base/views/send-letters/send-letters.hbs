@@ -1,0 +1,106 @@
+<style>
+.variable_name{
+  cursor: copy !important;
+}
+</style>
+<div class="row-fluid" id="content" style="overflow-y: auto; overflow-x: hidden; background: #fff;">  
+  <div class="list-view" style="padding: 20px;">
+    <div class="row-fluid span12">
+      <div class="alert alert-info alert-block">
+        <strong>Flexidocs Document Generator</strong> This tool allows you to generate and either email or print<br/>multiple documents simultaneously based on the criteria that you define.
+      </div>
+    </div>
+    <div class="row-fluid tleft control-group">
+      <div class="span2 control-label tcenter" style="padding: 5px;">
+        <label for="select01"><strong>Select your Primary Module</strong></label>
+      </div>
+      <div class="controls span2" style="padding-bottom: 20px;">
+        <select id="primary_module" class="select2 inherit-width" data-placeholder="Select a Module">
+          <option></option>
+          {{#each arModules}}
+            {{#if this}}
+            <option value="{{@key}}">{{this}}</option>
+            {{/if}}
+          {{/each}}
+        </select>
+      </div>
+      <div class="span2 control-label tcenter" style="padding: 5px;">
+        <label for="select01"><strong>Select Related Data</strong></label>
+      </div>
+      <div class="controls span4">
+        <input type="hidden" id="related_data" class="select2 inherit-width" data-placeholder="Select Related Data"/>
+      </div>
+    </div>
+    <div class="row-fluid span12" style="margin-left: 0;">
+      <div class="alert alert-info alert-block">
+        Select your filters to obtain a subset of data. Be careful when selecting your filters and you may end up with a large number of documents being generated otherwise.
+      </div>
+    </div>    
+    <div id='filter-container' style="padding-bottom: 20px;">
+      {{#each arFilters}}
+      <div class="row-fluid tleft control-group filter-row">
+        <div class="controls span3">
+          <input type="hidden" class="select_module inherit-width" data-placeholder="Select Module to Filter On"/>
+        </div>
+        <div class="controls span3">
+          <input type="hidden" class="select_field inherit-width" data-placeholder="Select a Field"/>
+        </div>
+        <div class="controls span3">
+          <select class="select_operator inherit-width" data-placeholder="Select Operator">
+            <option></option>          
+            <option value="=">Equals</option>          
+            <option value=">">Greater Than</option>          
+            <option value=">=">Greater Than or Equal To</option>          
+            <option value="<">Less Than</option>          
+            <option value="<=">Less Than or Equal To</option>          
+          </select>
+        </div>
+        <div class="controls span3">
+          <input type="text" class="select_value inherit-width" data-placeholder="Add Filter"/>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <div class="row-fluid span12" style="margin-left: 0;">
+      <div class="alert alert-info alert-block">
+        Select any totals you would like to display within the generated document and used the generated variable in your document.
+      </div>
+    </div>    
+    <div id="aggregate-container" style="padding-bottom: 20px;">
+    {{#each arTotals}}
+      <div class="row-fluid tleft control-group aggregate-row">
+        <div class="controls span3">
+          <input type="hidden" class="select_module select_related_total inherit-width" data-placeholder="Select Module to for Summation"/>
+        </div>
+        <div class="controls span3">
+          <input type="hidden" class="select_sum_field inherit-width" data-placeholder="Select a Field"/>
+        </div>
+        <div class="controls span3">
+          <select class="select_aggregate_operator inherit-width" data-placeholder="Select Operator">
+            <option></option>      
+            <option value="summation">Summation</option>          
+            <option value="average">Average</option>
+            <option value="minimum">Minimum</option>
+            <option value="maximum">Maximum</option>
+          </select>
+        </div>
+        <div class="controls span3">
+          <input type="text" readonly="readonly" data-content='click to copy variable' class="variable_name inherit-width" data-placeholder="Variable Name"/>
+        </div>
+      </div>  
+    {{/each}}  
+    </div>
+    <div class="row-fluid span12" style="margin-left: 0;">
+      <div class="alert alert-info alert-block">
+        Select the Document template you want to use.
+      </div>
+      <div class='documents-container' style="margin-bottom: 20px;">
+        <input type='text' class="select_document" data-placeholder="Select Flexidocs Document" />                    
+      </div>
+    </div>
+    <div style="margin-top: 30px; margin-bottom: 100px;">
+        <button class="btn-large btn-primary" id="filter-test" style="font-weight: bold;" type="button"><i class="fa fa-book icon-book"></i> Run Filter Test</button>
+        <button class="btn-large btn-primary" id="generate-letters" style="font-weight: bold;" type="button"><i class="fa fa-book icon-book"></i> Generate Letters</button>
+    </div>
+  </div>
+</div>

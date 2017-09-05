@@ -1,0 +1,49 @@
+<style>
+#interactive-container{
+	margin-top: 20px; 
+	padding:10px; 	
+	border: 1px solid #DDD; 	
+}
+#interactive-container label{
+	margin-top:10px;
+}
+#buttons-container button{
+	margin-left: 0px;
+}
+</style>
+<div id='interactive-container' class="span4 offset4">
+	<h4>Fill out the following fields to be included in merge</h4> 
+	<p class="help-block">Interactive fields detected for {{this.strIntellidocsName}}</p>
+	<form style='text-align: left'>		
+		{{#each this.objInteractiveFields}}
+		<div class="form-group">
+			<label for='{{this.name}}'>{{this.label}} {{#if this.is_required}}<span style='color: red'>*</span>{{/if}}</label>	
+			{{#eq this.field 'text'}}
+			  <input type='text' placeholder='{{this.label}}' name='{{this.name}}' class='interactive form-control span12' data-interactive='{{@key}}' />
+			{{/eq}}
+			{{#eq this.field 'date'}}    
+			  <input type='text' name='{{this.name}}' class='interactive datepicker form-control span12' data-interactive='{{@key}}'/>
+			{{/eq}}
+			{{#eq this.field 'textarea'}}
+			  <textarea name='{{this.name}}' class='interactive form-control span12' data-interactive='{{@key}}'></textarea>
+			{{/eq}}
+			{{#eq this.field 'checkbox'}}
+			  <input type="checkbox" name='{{this.name}}' class='interactive form-control' data-interactive='{{@key}}'/>
+			{{/eq}}
+			{{#eq this.field 'dropdown'}}
+			  <select name='{{this.name}}' id="" class='interactive form-control select2-field' data-interactive='{{@key}}'>
+			    {{#each this.options}}			    
+			    	<option value="{{this}}">{{this}}</option>
+			    {{/each}}
+			  </select>
+			{{/eq}}
+		</div>
+		{{/each}}
+		<div id='buttons-container'>
+			<button id='cancel-merge' class='btn btn-default' style='margin-top: 10px;'>Cancel</button>
+			<button id='submitInteractiveFields' class='btn btn-primary' style='margin-top: 10px;'>Continue to Merge</button>
+		</div>
+	</form>
+</div>
+
+

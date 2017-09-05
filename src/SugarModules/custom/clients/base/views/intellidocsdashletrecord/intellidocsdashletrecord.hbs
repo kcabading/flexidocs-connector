@@ -1,0 +1,479 @@
+{{!
+/*********************************************************************************
+ * By installing or using this file, you are confirming on behalf of the entity
+ * subscribed to the SugarCRM Inc. product ("Company") that Company is bound by
+ * the SugarCRM Inc. Master Subscription Agreement (“MSA”), which is viewable at:
+ * http://www.sugarcrm.com/master-subscription-agreement
+ *
+ * If Company is not bound by the MSA, then by installing or using this file
+ * you are agreeing unconditionally that Company will be bound by the MSA and
+ * certifying that you have authority to bind Company accordingly.
+ *
+ * Copyright (C) 2004-2014 SugarCRM Inc.  All rights reserved.
+ ********************************************************************************/
+
+}} 
+<style>
+.text-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;  
+}
+.intellidoc-details {
+  font-size: 14px;
+}
+.document-timeline-name{
+  font-size: 12px;
+}
+.intellidocs-record-list div.intellidocs-dashlet-record-view:nth-child(odd) {
+   background-color: #fff;
+}
+.fa-status{
+  color:white;
+}
+fieldset{
+  margin-bottom: 10px;
+ }
+
+#eventMailingModal input[type=text] {
+width: 240px;
+}
+#eventMailingModal select {
+  width: 253px;
+}
+
+.flexidoc-upload-file{
+  display: none;
+}
+/*.table-stripeds > tbody > tr:nth-child(3n+i) > td, 
+.table-stripeds > tbody > tr:nth-child(3n+i) > th { background-color: #ffffff; }*/
+
+.timeline {
+    list-style: none;
+    padding: 20px 0 20px;
+    position: relative;
+}
+
+.timeline:before {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 3px;
+    background-color: #eeeeee;
+    left: 0%;
+    margin-left: -1.5px;
+}
+
+.timeline > li {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.timeline > li:before,
+.timeline > li:after {
+    content: " ";
+    display: table;
+}
+
+.timeline > li:after {
+    clear: both;
+}
+
+.timeline > li:before,
+.timeline > li:after {
+    content: " ";
+    display: table;
+}
+
+.timeline > li:after {
+    clear: both;
+}
+
+.timeline > li > .timeline-panel {
+    width: 70%;
+    float: left;
+    border: 1px solid #d4d4d4;
+    border-radius: 2px;
+    padding: 20px;
+    position: relative;
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+}
+
+.timeline > li > .timeline-panel:before {
+    position: absolute;
+    top: 26px;
+    right: -15px;
+    display: inline-block;
+    border-top: 15px solid transparent;
+    border-left: 15px solid #ccc;
+    border-right: 0 solid #ccc;
+    border-bottom: 15px solid transparent;
+    content: " ";
+}
+
+.timeline > li > .timeline-panel:after {
+    position: absolute;
+    top: 27px;
+    right: -14px;
+    display: inline-block;
+    border-top: 14px solid transparent;
+    border-left: 14px solid #fff;
+    border-right: 0 solid #fff;
+    border-bottom: 14px solid transparent;
+    content: " ";
+}
+
+.timeline > li > .timeline-badge {
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+    text-align: center;
+    position: absolute;
+    top: 16px;
+    left: 0%;
+    margin-left: -25px;
+    background-color: #999999;
+    z-index: 100;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+.timeline > li > .timeline-badge i {
+  color: #fff !important;
+}
+
+.timeline > li.timeline-inverted > .timeline-panel {
+    float: left;
+    margin-left: 50px;
+}
+
+.timeline > li.timeline-inverted > .timeline-panel:before {
+    border-left-width: 0;
+    border-right-width: 15px;
+    left: -15px;
+    right: auto;
+}
+
+.timeline > li.timeline-inverted > .timeline-panel:after {
+    border-left-width: 0;
+    border-right-width: 14px;
+    left: -14px;
+    right: auto;
+}
+
+.timeline-badge.primary {
+    background-color: #2e6da4 !important;
+}
+
+.timeline-badge.success {
+    background-color: #3f903f !important;
+}
+
+.timeline-badge.warning {
+    background-color: #f0ad4e !important;
+}
+
+.timeline-badge.danger {
+    background-color: #d9534f !important;
+}
+
+.timeline-badge.info {
+    background-color: #5bc0de !important;
+}
+
+.timeline-title {
+    margin-top: 0;
+    color: inherit;
+    background-color: #fff !important;
+    padding-right: 10px !important;
+}
+
+.timeline-body > p,
+.timeline-body > ul {
+    margin-bottom: 0;
+    padding: 10px;
+}
+
+.timeline-body > p + p {
+    margin-top: 5px;
+}
+
+@media (max-width: 767px) {
+  ul.timeline:before {
+      left: 40px;
+  }
+
+  ul.timeline > li > .timeline-panel {
+      width: calc(100% - 90px);
+      width: -moz-calc(100% - 90px);
+      width: -webkit-calc(100% - 90px);
+  }
+
+  ul.timeline > li > .timeline-badge {
+      left: 15px;
+      margin-left: 0;
+      top: 16px;
+  }
+
+  ul.timeline > li > .timeline-panel {
+      float: right;
+  }
+
+  ul.timeline > li > .timeline-panel:before {
+      border-left-width: 0;
+      border-right-width: 15px;
+      left: -15px;
+      right: auto;
+  }
+
+  ul.timeline > li > .timeline-panel:after {
+      border-left-width: 0;
+      border-right-width: 14px;
+      left: -14px;
+      right: auto;
+  }
+}
+
+</style>
+<div id='{{this.cid}}'>   
+  {{#if this.arIntellidocs}}
+  <div class='intellidocs-record-list' style='height: 362px;'>    
+    {{#each this.arIntellidocs}}
+    <div class='intellidocs-dashlet-record-view' style='padding:10px; border-bottom: 1px solid #ccc;'>
+      <div class="intellidoc-details row-fluid" style='line-height: 28px;'>      
+        <div class='span4'>
+          <span rel="tooltip" data-placement="right" title="" data-original-title="{{this.document_name}}" class='text-overflow'><i class='icon icon-plus-sign fa fa-plus toggle-timeline'></i> <strong>{{this.document_name}}</strong></span>
+        </div>
+        <div class='span4'>
+          <span class='text-overflow' >Status: &nbsp;<strong>{{this.document_status}}</strong></span>
+        </div>
+        <div class='span4' style='text-align: right'>
+          <div class="btn-group btn-group-sm" role="group" aria-label="">          
+            <button rel="tooltip" data-placement="left" title="" data-original-title="Sign" data-record-id='{{this.id}}' data-file-type='{{this.file_ext}}' data-id='{{@key}}' data-name='{{this.document_name}}' type="button" class="btn btn-default sign-intellidocs" {{#eq this.no_of_signers 0}}disabled=disabled{{else}} {{#notEq this.document_status 'Merged'}}{{#notEq this.document_status 'Manually uploaded'}}disabled=disabled{{/notEq}}{{/notEq}}{{/eq}} ><i data-record-id='{{this.id}}' data-id='{{@key}}' data-file-type='{{this.file_ext}}' data-name='{{this.document_name}}' class="icon-edit fa fa-edit"></i></button>
+            {{#eq this.document_status 'Sent for signing'}}            
+            <button rel="tooltip" data-placement="left" title="" data-original-title="Cancel" type="button" class="btn btn-danger cancel-esign" data-id="{{this.id}}" data-name='{{this.document_name}}'><i class="icon-reply fa fa-reply" data-id="{{this.id}}" data-name='{{this.document_name}}'></i></button>
+            {{/eq}}
+            {{#eq this.document_status 'Signature request viewed'}}            
+            <button rel="tooltip" data-placement="left" title="" data-original-title="Cancel" type="button" class="btn btn-danger cancel-esign" data-id="{{this.id}}" data-name='{{this.document_name}}'><i class="icon-reply fa fa-reply" data-id="{{this.id}}" data-name='{{this.document_name}}'></i></button>
+            {{/eq}}
+            {{#eq this.allow_download 1}}            
+              {{#eq this.file_ext 'pdf'}}
+                {{#eq this.output_format_pdf 1}}                       
+                <a rel="tooltip" data-placement="left" title="" data-original-title="Download" type="button" class="btn btn-primary download-intellidocs" href="{{download_url}}" data-doc-event-id=""><i class="icon-download-alt fa fa-download"></i></a>
+                {{/eq}}
+              {{else}}
+                {{#eq this.output_format_orig 1}}                       
+                <a rel="tooltip" data-placement="left" title="" data-original-title="Download" type="button" class="btn btn-primary download-intellidocs" href="{{download_url}}" data-doc-event-id=""><i class="icon-download-alt fa fa-download"></i></a>
+                {{/eq}}
+              {{/eq}}
+            {{/eq}}
+            <input type="file" name='flexidoc-file' class='flexidoc-upload-file' data-document-id='{{@key}}' data-record-id='{{this.id}}'> 
+            <button {{#notEq this.document_status 'Merged'}}{{#notEq this.document_status 'Manually uploaded'}}disabled=disabled{{/notEq}}{{/notEq}} rel="tooltip" data-placement="left" title="" data-original-title="Upload" type="button" class="btn btn-primary upload-new-version"><i class="icon-upload-alt fa fa-upload "></i></button>            
+          </div>
+        </div>
+      </div>
+      <div class='span12' style="display: none; padding-top: 10px; border-bottom: 1px solid #ccc; margin-bottom: 10px;">
+        <ul style="margin-left: 20px;" class="timeline">
+          {{#each this.events}}
+            {{#if this.exceedlimit}}
+            <a style="padding-right: 35px; padding-bottom: 20px; float: right;" href="#{{buildRoute module='idoc_documents' id=../../this.id}}" >Show More...</a>
+            {{else}}                                         
+              {{#eq this.file_ext 'pdf'}}
+                {{#eq ../../../this.output_format_pdf 1}}
+                <li class="timeline-inverted">
+                <div class="timeline-badge {{badge_colour}}"><i class="fa {{badge_icon}}"></i></div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4 class="timeline-title">{{document_status_label}}
+                      <div class="pull-right">{{relativeTime this.date_entered}}</div>
+                    </h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p>
+                      {{#if ../../../../../this.intLobEnabled}}                        
+                        {{#has this.document_status ../../../../../../this.arSendLetterStatus}}
+                          <a data-id='{{@key}}' data-event-id = '{{this.id}}' style="float: right; margin-left: 10px;" href="" class='mail-document' data-action="send-letter"><i data-id='{{@key}}' data-event-id = '{{this.id}}' class="mail-document icon-envelope fa fa-envelope"></i>Send Letter</a>
+                        {{/has}}    
+                      {{/if}}
+                      {{#has this.document_status ../../../../../this.arSendLetterStatus}}
+                        {{#eq ../../../../../this.allow_download 1}}                        
+                          <a style="float: right;" href="rest/v10/idoc_events/{{this.id}}/file/uploadfile?force_download=1&amp;1439429232614=1&amp;platform=base" data-action="download"><i class="icon-download-alt fa fa-download"></i>Download</a>                            
+                        {{/eq}}
+                      {{/has}}
+                      {{description}}.
+                    </p>
+                  </div>
+                </div>
+                </li> 
+                {{/eq}}
+              {{/eq}}
+              {{#notEq this.file_ext 'pdf'}}
+                {{#eq ../../../this.output_format_orig 1}}
+                <li class="timeline-inverted">
+                <div class="timeline-badge {{badge_colour}}"><i class="fa {{badge_icon}}"></i></div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4 class="timeline-title">{{document_status_label}}
+                      <div class="pull-right">{{relativeTime this.date_entered}}</div>
+                    </h4>
+                  </div>
+                  <div class="timeline-body">
+                    <p>                      
+                      {{#if ../../../../../this.intLobEnabled}}                        
+                        {{#has ../this.document_status ../../../../../../this.arSendLetterStatus}}
+                          <a data-id='{{@key}}' data-event-id = '{{this.id}}' style="float: right; margin-left: 10px;" href="" class='mail-document' data-action="send-letter"><i data-id='{{@key}}' data-event-id = '{{this.id}}' class="mail-document icon-envelope fa fa-envelope"></i>Send Letter</a>
+                        {{/has}}    
+                      {{/if}}
+                      {{#has this.document_status ../../../../../this.arSendLetterStatus}}
+                        {{#eq ../../../../../this.allow_download 1}}                       
+                          <a style="float: right;" href="rest/v10/idoc_events/{{this.id}}/file/uploadfile?force_download=1&amp;1439429232614=1&amp;platform=base" data-action="download"><i class="icon-download-alt fa fa-download"></i>Download</a>                            
+                        {{/eq}}
+                      {{/has}}
+                      {{description}}.
+                    </p>
+                  </div>
+                </div>
+                </li> 
+                {{/eq}}
+              {{/notEq}}
+            {{/if}}  
+          {{/each}}      
+        </ul>
+      </div>
+    </div>
+    {{/each}}
+  </div>      
+  {{else}}
+    {{#if this.bNoResult}}
+      <p style="padding: 10px;">
+        No Flexidocs Found. You can access and generate your documents from the contextual menu in the record view.
+      </p>
+    {{else}}
+      <div class="loading" style='padding: 20px;'>
+      Loading<i class="l1 icon-circle fa-circle fa"></i><i class="l2 icon-circle fa-circle fa"></i><i class="l3 icon-circle fa-circle fa"></i>
+      </div>
+    {{/if}}    
+  {{/if}}
+</div>
+<!-- Open Mailing Details Modal -->
+  <div id="eventMailingModal" class="modal fade flexidocs-modal" role="dialog" style='position:relative; top: 100px; display:none;'>
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style='background: #599AD3;color: #fff;'>
+          <button type="button" class="close" data-dismiss="modal" style='color: #fff; opacity: 1;'>&times;</button>
+          <h4 class="modal-title">Enter Mailing Address</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row-fluid">
+              <div class="span6">
+                <form>
+                {{#if this.arDefaultAddresses }}                  
+                  <fieldset class="form-group">                    
+                    <label for="event-default-addresses">Select which mailing address to use</label>
+                    <select id='event-default-addresses' class='form-control addresses'>
+                      {{#each this.arDefaultAddresses}}
+                      <option value='{{@key}}'>{{@key}}</option>
+                      {{/each}}
+                    </select>
+                  </fieldset>
+                {{else}}
+                  <h5>No Address field found on the record. Please enter mailing address below.</h5>
+                {{/if}}                  
+                </form>
+              </div>    
+              <div class="span6">
+                <form>
+                  <fieldset class="form-group">
+                    <label for="event_letter_description">Letter Description</label>
+                    <input type="text" class="form-control addresses" id="event_letter_description" placeholder="Enter short description of the letter">
+                  </fieldset>                  
+                </form>
+              </div>               
+            </div>
+            <div class="row-fluid">                    
+              <div class="span6">                
+                <form>
+                  <fieldset class="form-group">
+                    <label for="address_line1">Address Line 1 <i style="color: #FF5C5C;">*</i></label>
+                    <input type="text" class="form-control addresses" id="event_address_line1" placeholder="Address 1" value='{{this.arDefaultAddresses.primary_address.primary_address_street}}'>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="address_city">City</label>
+                    <input type="text" class="form-control addresses" id="event_address_city" placeholder="City" value='{{this.arDefaultAddresses.primary_address.primary_address_city}}'>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="address_zip">Zip</label>
+                    <input type="text" class="form-control addresses" id="event_address_zip" placeholder="Zip Code" value='{{this.arDefaultAddresses.primary_address.primary_address_postalcode}}'>
+                  </fieldset>                  
+                </form>
+              </div>
+              <div class="span6">                      
+                <form>
+                  <fieldset class="form-group">
+                    <label for="address_line2">Address Line 2</label>
+                    <input type="text" class="form-control addresses" id="event_address_line2" placeholder="Address 2">
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="address_state">State</label>
+                    <input type="text" class="form-control addresses" id="event_address_state" placeholder="State" value='{{this.arDefaultAddresses.primary_address.primary_address_state}}'>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="address_country">Country</label>
+                    <select type="text" class="form-control addresses select2-field" id="event_address_country" >
+                      <option value=''></option>
+                      {{#each this.arCountryCode}}
+                        <option value='{{@key}}' {{#eq @key ../this.arDefaultAddresses.primary_address.primary_address_country }} selected='selected' {{/eq}} >{{this}}</option>
+                      {{/each}}
+                    </select>
+                    <!-- <input type="text" class="form-control addresses" id="event_address_country" placeholder="2 letter country short-name code (ISO 3166)" value='{{this.arDefaultAddresses.primary_address.primary_address_country}}'> -->
+                  </fieldset>                  
+                </form>
+              </div>              
+            </div>
+            <div class="row-fluid">                    
+              <div class="span6">                
+                <form>
+                  <fieldset class="form-group">
+                    <label for="print_type">Print Type</label>
+                    <div class="radio">
+                      <label><input type="radio" name="event_print_type" value='1' > Colored</label>
+                    </div>
+                    <div class="radio">
+                      <label><input type="radio" name="event_print_type" value='0' checked> Black and White</label>
+                    </div>                    
+                  </fieldset>
+                </form>
+              </div>
+              <div class="span6">                
+                <form>
+                  <fieldset class="form-group">
+                    <label for="double_sided">Double Sided?</label>
+                    <div class="radio">
+                      <label><input type="radio" name="event_double_sided" value='1' checked> Yes</label>
+                    </div>
+                    <div class="radio">
+                      <label><input type="radio" name="event_double_sided" value='0' > No</label>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>                
+        </div>
+        <div class="modal-footer">                
+          <button type="button" class="btn btn-default" id='event-verify-address'> <i class='fa fa-refresh icon-refresh' ></i> Verify</button>
+          <button type="button" class="btn btn-primary" id='event-send-to-address'><i class='icon-envelope fa fa-envelope' ></i> Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Mailing Details Modal -->

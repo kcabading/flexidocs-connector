@@ -1,0 +1,16 @@
+<div class="row" id="content" style="overflow-y: auto; overflow-x: hidden; background: #fff; height: 60%;">  
+  <form class="form-horizontal" style="width: 500px; margin: 0 auto; margin-top: 25px;">
+    <legend style="margin-bottom: 0px;">Flexidocs Management</legend>
+    <div class="control-group tcenter">
+      <div class="controls">        
+        <span><strong>Last Sync:</strong> {{#if this.strLastUpdated}}{{this.strLastUpdated}}{{else}}Not sync yet{{/if}}</span>
+      </div>
+    </div>
+    <div class="control-group tcenter">
+      <div class="controls" style="margin: 0px;">        
+        <button class="btn btn-primary" id="updateDocuments" type="button" style="margin: 0px;"><i class="icon-refresh fa fa-refresh"></i> Update Flexidocs Documents</button>
+        <button class="btn btn-default" id="cancel" type="button" style="margin: 0px;"><i class="icon-minus-sign fa fa-minus"></i> Close</button>                          
+      </div>
+    </div>
+  </form>
+</div>

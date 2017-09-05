@@ -1,0 +1,72 @@
+<style>
+.list-view .table tbody tr td:hover .icon-star-empty:before {
+  content: "\f005"; 
+  color: #e6af17;       
+}
+span.icon-star-empty.fa.fa-star{
+  margin:0 auto;
+}
+span.fa-star:hover{
+  cursor: pointer;
+}
+</style>
+<div class="row-fluid" id="content" style="overflow-y: auto; overflow-x: hidden; background: #fff;">
+  <div class="title-section row-fluid record-panel-content tcenter">
+    <h1> Manage Flexidocs Documents </h1>
+  </div> 
+  <div class="tcenter">
+    <div>
+        <select name="search_name" id="search_name" data-placeholder="Search document name here..." style="width: 400px;" >
+          <option value=""></option>
+          {{#each templateCollection.models}}         
+          <option value="{{attributes.id}}" > {{attributes.name}}</option>
+          {{/each}}         
+        </select>
+    </div>
+    <div class="list-view">
+    <table class="table table-striped dataTable">
+      <thead>
+        <tr>
+          <th width="5%" style="text-align: center">Favorite
+          </th>
+          <th class="sorting orderBy[field]" data-fieldname="[field]" data-orderby="" >
+            <span>Document Name</span>
+          </th>                    
+          <th class="sorting orderBy[field]" data-fieldname="[field]" data-orderby="">
+            <span>Action</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#if templateCollection.length}}
+          {{#if searchDocument}}
+            {{#each templateCollection.models}}              
+              {{#eq attributes.id ../searchDocument}}
+              <tr>
+                <td class="favorite" data-document-id="{{attributes.id}}">              
+                <span class="icon-star-empty fa fa-star" name="favorites" style="text-align: center" rel="tooltip" title="Favorite"></span></td>
+                <td>{{attributes.name}}</td>                      
+                <td><button type="button" data-id="{{attributes.id}}" data-name="{{attributes.name}}" data-parent-id="{{attributes.parent_id}}" data-file-type="{{attributes.file_type}}" data-parent-module="{{attributes.parent_module}}" class="btn btn-primary btn-mini mergeDocument"><i class="icon-ok-circle fa fa-check"></i> Merge</button></td>
+              </tr>          
+              {{/eq}}
+            {{/each}}
+          {{else}}  
+            {{#each templateCollection.models}}              
+              <tr>
+                <td class="favorite" data-document-id="{{attributes.id}}">              
+                <span class="icon-star-empty fa fa-star" name="favorites" style="text-align: center" rel="tooltip" title="Favorite"></span></td>
+                <td>{{attributes.name}}</td>                      
+                <td><button type="button" data-id="{{attributes.id}}" data-name="{{attributes.name}}" data-parent-id="{{attributes.parent_id}}" data-file-type="{{attributes.file_type}}" data-parent-module="{{attributes.parent_module}}" class="btn btn-primary btn-mini mergeDocument"><i class="icon-ok-circle fa fa-check"></i> Merge</button></td>
+              </tr>                        
+            {{/each}}
+          {{/if}}            
+        {{/if}}
+      </tbody>
+    </table>
+    </div>
+    <br />
+    <div class="row-fluid control-group">
+        <button class="btn btn-default" id="cancelMerge" type="button"><i class="icon-minus-sign fa fa-minus"></i> Close</button>            
+    </div>    
+  </div>
+</div>

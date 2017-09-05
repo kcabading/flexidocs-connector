@@ -1,0 +1,50 @@
+<style>
+#merge-multiple-container{
+	margin-top: 20px; 
+	padding:10px; 	
+	border: 1px solid #DDD; 	
+	background: #F6F6F6;
+}
+#merge-multiple-container label{
+	margin-top:10px;
+}
+#merge-multiple-container h4, #merge-multiple-container p{
+	text-align: center;
+	margin-bottom: 10px !important;
+}
+#buttons-container button{
+	margin-left: 0px;
+	margin-right: 10px;
+}  
+</style>
+<div class="row-fluid" style="overflow-y: auto; overflow-x: hidden; background: #fff; ">
+	<div class="span12" id='merge-multiple-container'>
+		<h4>Select document templates</h4>
+		<p class="help-block">Upon merging selected documents, Flexidocs will return a single file docx containing all the merged documents.</p>
+		<div id="document-list" style='padding:0px 50px;'>
+			<div class="row-fluid">
+			{{#each templateCollection.models}}					
+				{{#eq attributes.file_type 'docx'}}
+				  	{{#unless attributes.is_interactive}}
+						<div class="span4" style='margin-left:0px;'>				
+							<input type="checkbox" value='{{attributes.id}}' class='document-templates'/>	
+							{{attributes.name}}
+						</div>
+				   	{{/unless}}
+				{{/eq}}
+			{{/each}}		
+			</div>
+		</div>
+		<!-- <div class="span12">
+			<label for="merge_type">Select Merge Type</label>
+			<select name="merge_type" id="merge_type">
+				<option value="docx">DOCX</option>
+				<option value="pdf">PDF</option>
+			</select>
+		</div> -->
+		<div id='buttons-container' class='span12'>			
+			<button id='cancel-merge' class='btn btn-default' style='margin-top: 10px;'>Cancel</button>
+			<button id='mergeMultipleTemplates' class='btn btn-primary' style='margin-top: 10px;'><i class='mergeMultipleIcon fa fa-check'></i> Merge selected templates</button>			
+		</div>
+	</div>  
+</div>

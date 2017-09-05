@@ -1,0 +1,239 @@
+{{#if bLoaded}}
+<style type="text/css">
+ fieldset{
+  margin-bottom: 10px;
+ }
+ #mailingModal input[type=text] {
+  width: 240px;
+ }
+ #mailingModal select{
+  width: 253px;
+ }
+</style>
+  <div id="maincontent">
+    <div class="tcenter">  
+      {{#unless this.bAlreadyMerged}}
+      <div class="row-fluid control-group">
+        <h4 style="color:#177de2; margin-top:20px ; font-size: 18px;">You have successfully merged your document!</h4>
+      </div>      
+      {{/unless}}
+      <div class="row-fluid control-group" style="margin-top: 20px; font-size:15px">
+        <div class="btn-group">
+          <button id='download-as' type="button" class="btn btn-primary btn-large dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style='border-radius: 6px;'><i id="idocsDownloadIcon" class="icon-download-alt fa fa-download"></i>&nbsp;&nbsp; Download Document
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="rest/v10/idoc_documents/{{this.strIntellidocsRecordId}}/file/uploadfile?force_download=1&amp;1412745080620=1&amp;platform=base">{{this.strFileType}}</a></li>
+            <li><a href="javascript:void(0)" data-format="pdf" data-intellidocsid="{{this.strIntellidocsRecordId}}" class="convert-merged-document">PDF</a></li>
+          </ul>
+        </div>
+        <div class="btn-group">
+          <button id='email-as' type="button" class="btn btn-primary btn-large dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style='border-radius: 6px;'><i id="idocsEmailIcon" class="icon-envelope fa fa-envelope"></i>&nbsp;&nbsp; Email Document
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="javascript:void(0)" data-format="original" data-intellidocsid="{{strIntellidocsRecordId}}" class="email-merged-document">{{this.strFileType}}</a></li>
+            <li><a href="javascript:void(0)" data-format="pdf" data-intellidocsid="{{strIntellidocsRecordId}}" class="email-merged-document">PDF</a></li>
+          </ul>
+        </div>
+        <!-- <div class='btn-group'>
+          <button type="button" class="btn btn-primary btn-large mail-document" style='border-radius: 6px;'><i id="mail-document" class="icon-envelope fa fa-envelope mail-document"></i>&nbsp;&nbsp; Mail Document
+          </button>
+        </div> -->
+      </div>
+      {{#if intNoOfSigners}}
+      <div id="esignsection">
+        <div style="border-bottom: none; border-top: 1px solid #eee; margin-top: 20px; padding: 1%">
+          <span style="font-size: 18px; font-weight:bold;" class="modal-title" id="myModalLabel">Send for Electronic Signing? &nbsp;</span>
+          <span>            
+          <input type="checkbox" id="send_for_signing" name="send_for_signing" data-on-text="YES" data-off-text="NO" data-size="mini"/>
+          </span>
+        </div>
+        <div>
+          <div id="signing_details" style="display: none; padding: 20px 0 20px 0;">
+            <div id="contactListSection" style="margin-bottom: 20px; margin-top: 20px;">
+              <span style="font-size: 18px; font-weight:bold;" > This document requires {{intNoOfSigners}} signer/s</span><br />
+              <span style="font-size: 18px; font-weight:bold;" > Select related contacts or users to sign:</span><br />
+              <input id="contactList" type="hidden" class="select2" style="margin-top: 20px; width: 450px;" data-placeholder="Select contacts or users here..." value="{{strDefaultContacts}}"/>
+            </div>
+            <input type="checkbox" id="in_person_signing" name="in_person_signing" data-on-text="&nbsp; IPAD &nbsp;" data-off-text="EMAIL" data-size="normal"/>                        
+            <div id="emailSection">
+              <div>
+                <input type="text" placeholder="Subject" style="width: 40%; padding: .8% 1%; border-top-left-radius: 10px;
+border-top-right-radius: 10px; margin-top: 20px;"  id="emailSubject" value="{{this.emailSubject}}" ><br>
+              <textarea id="emailBody" style=" width: 40%; padding: 1%; border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px; " rows="7"></textarea>                
+              </div>
+            </div>
+          </div>           
+        </div>
+      </div>
+      {{else}}
+      <div style="margin-top: 20px; margin-bottom: 20px;">
+        <span class="label label-info">No signature tags detected in this document.</span>
+      </div> 
+      {{/if}}
+      <div style="margin-top: 10px; margin-bottom: 100px;">
+        <button class="btn btn-default" id="cancel-for-esign" style="font-weight: bold;" type="button"><i class="icon-minus-sign fa fa-minus"></i> CLOSE</button>                                 
+        <button class="btn btn-primary" id="send-for-esign" style="font-weight: bold; display: none;" type="button"><i class="icon-ok-circle fa fa-check"></i> SEND</button>        
+      </div>
+    </div>
+  </div>  
+  <div id="urlimage" style="display: none;">
+    <div class="alert-info" style="padding: 2% 1%; margin: 0 auto; width: 40%;">        
+      <span>Please use a QR code reader to open the URL in your IPAD browser.</span>
+    </div>
+    <div class="row-fluid tcenter" style="margin-top: 20px;" id="test"> 
+      <table align="center">
+        <tr>
+          <td id="url"></td>
+        </tr>
+        <tr >
+          <td id="url_link"></td>
+        </tr>
+      </table>
+      <div>
+          <img id="urlimgsrc0" src="" style="display: none;">
+          <a href="#" id="urlsigning0" target="_blank" style="display: none;">Click Here</a>
+      </div>
+    </div>
+    <div class="row-fluid tcenter" style="margin-top: 20px;"> 
+      
+    </div>
+    <div class="row-fluid tcenter"> 
+      <div style="margin-top: 10px; margin-bottom: 100px;">
+        <button class="btn btn-primary" id="close-panel" style="font-weight: bold;" type="button"><i class="icon-minus-sign fa fa-minus"></i> CLOSE</button>
+      </div>
+    </div>
+  </div>
+  {{else}}
+  <div id="loading">
+    <div class="row-fluid tcenter"> 
+      {{#if this.bAlreadyMerged}}
+      <div class="title-section row-fluid record-panel-content tcenter"><h1> Sending to Signature View...</h1></div>      
+      {{else}}
+      <div class="title-section row-fluid record-panel-content tcenter"><h1> Merging document.. </h1></div>      
+      {{/if}}
+      <div class="row-fluid panel_body">
+        <div class="span12">
+          <div class="span4 offset4 tcenter record-cell">
+            <!-- <img src='custom/images/webmerge-loader.gif' /> -->            
+            <i class="fa fa-spinner fa-5x fa-spin icon-spinner icon-5x icon-spin "></i>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+  <!-- Open Mailing Details Modal -->
+  <div id="mailingModal" class="modal fade flexidocs-modal" role="dialog" style='position:relative; top: 100px;'>
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style='background: #599AD3;color: #fff;'>
+          <button type="button" class="close" data-dismiss="modal" style='color: #fff; opacity: 1;'>&times;</button>
+          <h4 class="modal-title">Enter Mailing Address</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row-fluid">
+              <div class="span6">
+                <form>
+                {{#if this.arDefaultAddresses }}                  
+                  <fieldset class="form-group">                    
+                    <label for="default-addresses">Select which mailing address to use</label>
+                    <select id='default-addresses' class='form-control addresses'>
+                      {{#each this.arDefaultAddresses}}
+                      <option value='{{@key}}'>{{@key}}</option>
+                      {{/each}}
+                    </select>
+                  </fieldset>
+                {{else}}
+                  <h5>No Address field found on the record. Please enter mailing address below.</h5>
+                {{/if}}                  
+                </form>
+              </div>
+              <div class="span6">
+                <form>
+                  <fieldset class="form-group">
+                    <label for="letter_description">Letter Description</label>
+                    <input type="text" class="form-control addresses" id="letter_description" placeholder="Enter short description of the letter" >
+                  </fieldset>                  
+                </form>
+              </div>                   
+            </div>
+            <div class="row-fluid">                    
+              <div class="span6">                
+                <form>
+                  <fieldset class="form-group">
+                    <label for="address_line1">Address Line 1 <i style="color: #FF5C5C;">*</i></label>
+                    <input type="text" class="form-control addresses" id="address_line1" placeholder="Address 1" value='{{this.arDefaultAddresses.primary_address.primary_address_street}}'>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="address_city">City</label>
+                    <input type="text" class="form-control addresses" id="address_city" placeholder="City" value='{{this.arDefaultAddresses.primary_address.primary_address_city}}'>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="address_zip">Zip</label>
+                    <input type="text" class="form-control addresses" id="address_zip" placeholder="Zip Code" value='{{this.arDefaultAddresses.primary_address.primary_address_postalcode}}'>
+                  </fieldset>                  
+                </form>
+              </div>
+              <div class="span6">                      
+                <form>
+                  <fieldset class="form-group">
+                    <label for="address_line2">Address Line 2</label>
+                    <input type="text" class="form-control addresses" id="address_line2" placeholder="Address 2">
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="address_state">State</label>
+                    <input type="text" class="form-control addresses" id="address_state" placeholder="State" value='{{this.arDefaultAddresses.primary_address.primary_address_state}}'>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="address_country">Country</label>                    
+                    <select type="text" class="form-control addresses select2-field" id="address_country" >
+                      <option value=''></option>
+                      {{#each this.arCountryCode}}
+                        <option value='{{@key}}' {{#eq @key ../this.arDefaultAddresses.primary_address.primary_address_country }} selected='selected' {{/eq}} >{{this}}</option>
+                      {{/each}}
+                    </select>
+                  </fieldset>                  
+                </form>
+              </div>              
+            </div>
+            <div class="row-fluid">                    
+              <div class="span6">                
+                <form>
+                  <fieldset class="form-group">
+                    <label for="print_type">Print Type</label>
+                    <div class="radio">
+                      <label><input type="radio" name="print_type" value='1' > Colored</label>
+                    </div>
+                    <div class="radio">
+                      <label><input type="radio" name="print_type" value='0' checked> Black and White</label>
+                    </div>                    
+                  </fieldset>
+                </form>
+              </div>
+              <div class="span6">                
+                <form>
+                  <fieldset class="form-group">
+                    <label for="double_sided">Double Sided?</label>
+                    <div class="radio">
+                      <label><input type="radio" name="double_sided" value='1' checked> Yes</label>
+                    </div>
+                    <div class="radio">
+                      <label><input type="radio" name="double_sided" value='0' > No</label>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>                
+        </div>
+        <div class="modal-footer">                
+          <button type="button" class="btn btn-default" id='verify-address'> <i class='fa fa-refresh icon-refresh' ></i> Verify</button>
+          <button type="button" class="btn btn-primary" id='send-to-address'><i class='icon-envelope fa fa-envelope' ></i> Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Mailing Details Modal -->

@@ -1,0 +1,52 @@
+<div>
+    <div class="headerpane">
+        <h1>
+            <span class="record-cell" data-type="" data-name="">
+                <input type="text" value="{{ this.objIntellidocs.name }}" >
+            </span>                    
+            <span class="record-cell">
+                Status:&nbsp;
+                <select id="documentstatus">                  
+                  {{#each this.arStatusList }}
+                  <option {{#eq this ../this.objIntellidocs.status }} selected=selected {{/eq}} value="{{this}}">{{this}}</option>
+                  {{/each}}
+                </select>
+            </span>
+            <span class="record-cell pull-right">
+                <button class="btn btn-danger">Delete</button>
+                <button class="btn btn-primary">Save</button>
+            </span>
+        </h1>
+    </div>
+    <div class='events'>                
+        <div class="main-content">
+            <div id='document-timeline' style='padding:10px; font-weight:bold'>DOCUMENT TIMELINE</div>
+            <div class="block filtered activitystream-layout">
+                <ul class="activitystream-list results">
+                    {{#each this.objIntellidocs.timeline }}
+                    <li class="activitystream-posts-comments-container">
+                        <div class="label label-module label-module-md label-Notes pull-left" rel="tooltip" data-placement="right" title="" data-original-title="Flexidocs" tabindex="-1">Id</div>
+                        <p>          
+                            </p>
+                                <div>
+                                    <span class="tagged">{{this.document_status}} 
+                                        <a href="rest/v10/idoc_events/{{this.id}}/file/uploadfile?force_download=1&1439429232614=1&platform=base" data-action="download" >{{this.document_name}}</a>
+                                    </span>
+                                </div>
+                            <p>
+                        </p>
+                        <span class="details">
+                            <a href="#bwc/index.php?module=Employees&amp;action=DetailView&amp;record={{this.modified_user_id}}">{{this.modified_user_name}}</a>
+                            <date class="date">
+                                <span class="relativetime">                                    
+                                        <time class="date" rel="tooltip" title="" data-original-title="{{ this.date_modified }}" tabindex="-1">{{relativeTime this.date_modified }}</time>                                    
+                                </span>
+                            </date>
+                        </span>
+                    </li>       
+                    {{/each}}             
+                </ul>    
+            </div>
+        </div>
+    </div>    
+</div>
